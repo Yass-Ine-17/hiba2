@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday 💖</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .gift-box {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(to bottom, #ff416c, #ff4b2b);
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 75, 43, 0.5);
+      transition: transform 0.3s;
+    }
+
+    .gift-box:hover {
+      transform: scale(1.05);
+    }
+
+    .lid {
+      position: absolute;
+      top: -30px;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(to bottom, #ff4b2b, #ff416c);
+      border-radius: 10px 10px 0 0;
+      transition: transform 0.5s;
+      transform-origin: bottom;
+      z-index: 10;
+    }
+
+    .gift-box.open .lid {
+      transform: rotateX(100deg);
+    }
+
+    .ribbon-horizontal, .ribbon-vertical {
+      position: absolute;
+      background: gold;
+    }
+
+    .ribbon-horizontal {
+      width: 100%;
+      height: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .ribbon-vertical {
+      height: 100%;
+      width: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gift-content {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    .gift-content.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    .gift-message {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #ffdddd;
+    }
+
+    .gift-content img {
+      width: 150px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(255, 75, 43, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Happy Birthday, My Love! 🎉</h1>
+
+    <div class="timer" id="timer"></div>
+
+    <p class="message" id="typing"></p>
+
+    <p class="scroll-hint">↔️ Swipe or scroll to see more photos</p>
+
+    <div class="gallery-wrapper">
+      <div class="gallery" id="gallery">
+        <img src="images/1.jpg" alt="Us 1">
+        <img src="images/2.jpg" alt="Us 2">
+        <img src="images/3.jpg" alt="Us 3">
+        <img src="images/4.jpg" alt="Us 4">
+        <img src="images/5.jpg" alt="Us 5">
+        <img src="images/6.jpg" alt="Us 6">
+        <img src="images/7.jpg" alt="Us 7">
+        <img src="images/8.jpg" alt="Us 8">
+        <img src="images/9.jpg" alt="Us 9">
+        <img src="images/10.jpg" alt="Us 10">
+      </div>
+    </div>
+  </div>
+
+  <div class="special-section">
+    <div class="special-text">
+      <h2>My Favorite Person 💗</h2>
+      <p>
+        inti akther min mizyena, latifa, thakiya koll la7tha ma3 ba3thna taf7ali we ta5ali 7ayeti a7la tha7iktik tafar7ni . soutik a7la 7aja sam3itha na7is rou7i incredibly lucky bich na3adi ma3k 7ayeti You inspire me to be better, to dream bigger and to love deeper every single day 3aychik 3al 5atrik ma3ya fi aw9at 5ayba 9abl sa3iba I cherish you more than words can say. i love you more then ever 
+      </p>
+    </div>
+    <div class="special-img">
+      <img class="blend-img" src="images/big.jpg" alt="My Love">
+    </div>
+  </div>
+
+  <div class="video-section">
+    <h2 class="vdtext">🎥 Moments We Spend Together</h2>
+    <div class="video-center">
+      <video id="hoverVideo" controls>
+        <source src="vd/vd 1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="firework-container">
+    <img src="fire work/mc_rocket.png" class="firework left" />
+    <img src="fire work/mc_rocket.png" class="firework right" />
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="Ed Sheeran - Perfect (Official Music Video).mp3" type="audio/mpeg" />
+  </audio>
+
+<div class="text-gift">
+  <p>click to see ur Gift 🎁</p>
+</div>
+
+  <div id="giftBox" class="gift-box">
+    <div class="lid"></div>
+    <div class="ribbon-horizontal"></div>
+    <div class="ribbon-vertical"></div>
+  </div>
+
+
+  <div id="giftContent" class="gift-content">
+    <div class="gift-message">🤣 sade9ti atw ta3irfi ki no5irju 🤣 zidi istani</div>
+  </div>
+
+
+  <footer class="final-message">
+  <blockquote>
+    "a7la insen a3raftu fi 7ayeti nachlh koll 3am winti ma3ya far7ana ya rouhy" 💫
+  </blockquote>
+</footer>
+
+
+  <script src="script.js"></script>
+  <script>
+    const giftBox = document.getElementById('giftBox');
+    const giftContent = document.getElementById('giftContent');
+    const bgMusic = document.getElementById('bgMusic');
+
+    giftBox.addEventListener('click', () => {
+      giftBox.classList.toggle('open');
+      giftContent.classList.toggle('show');
+      bgMusic.volume = 0.2;
+      bgMusic.play();
+    });
+  </script>
+  
+</body>
+</html>
