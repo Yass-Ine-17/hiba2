@@ -8,7 +8,7 @@ function updateAge() {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
   const weeks = Math.floor(days / 7);
-  const months = Math.floor(days / 30.44); // average month
+  const months = Math.floor(days / 30.44);
   const years = Math.floor(days / 365.25);
 
   const timeData = {
@@ -35,6 +35,7 @@ function updateAge() {
 updateAge();
 setInterval(updateAge, 1000);
 
+// Typing message
 const text = `Every second with you is a gift. I'm so grateful for your smile, your heart, and every little thing about you. Happy Birthday, beautiful 💞`;
 const typingElement = document.getElementById("typing");
 let index = 0;
@@ -43,23 +44,13 @@ function typeLetter() {
   if (index < text.length) {
     typingElement.textContent += text.charAt(index);
     index++;
-    setTimeout(typeLetter, 40); // typing speed
+    setTimeout(typeLetter, 40);
   }
 }
 
 document.addEventListener("DOMContentLoaded", typeLetter);
 
-window.addEventListener('DOMContentLoaded', () => {
-  const video = document.querySelector('video');
-  if (video) {
-    setTimeout(() => {
-      video.play().catch(() => {
-        // Autoplay blocked silently
-      });
-    }, 5000);
-  }
-});
-
+// Firework and particles
 let fireworksActive = true;
 
 function spawnParticles(x, y, count = 50) {
@@ -92,14 +83,12 @@ function launchRocket(rocket) {
   rocket.style.opacity = '1';
 
   const explodeHeight = window.innerHeight - rocket.offsetHeight - 100;
-
   let start = null;
 
   function animate(time) {
     if (!start) start = time;
     const elapsed = time - start;
     const duration = 2000;
-
     const progress = Math.min(elapsed / duration, 1);
     rocket.style.bottom = (progress * explodeHeight) + 'px';
 
@@ -121,46 +110,43 @@ function launchRocket(rocket) {
   requestAnimationFrame(animate);
 }
 
+// Everything on page load
 window.onload = () => {
   const leftRocket = document.querySelector('.firework.left');
   const rightRocket = document.querySelector('.firework.right');
+  const bgMusic = document.getElementById('bgMusic');
+  const giftBox = document.getElementById('giftBox');
+  const giftContent = document.getElementById('giftContent');
 
+  // Launch 2 fireworks
   launchRocket(leftRocket);
   setTimeout(() => launchRocket(rightRocket), 1000);
+  setTimeout(() => { fireworksActive = false; }, 5000);
 
-  setTimeout(() => {
-    fireworksActive = false;
-  }, 5000);
-
-  // Attempt to play background music on load
-  const bgMusic = document.getElementById('bgMusic');
+  // Try to play music on load
   if (bgMusic) {
+    bgMusic.currentTime = 15;
     bgMusic.volume = 0.2;
     bgMusic.play().catch(() => {
       console.log('Autoplay blocked: user interaction required to start audio.');
     });
   }
+
+  // Gift box click effect
+  giftBox.addEventListener('click', () => {
+    giftBox.classList.toggle('open');
+    giftContent.classList.toggle('show');
+    bgMusic.play();
+
+    for (let i = 0; i < 20; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = `${giftBox.offsetLeft + 75}px`;
+      sparkle.style.top = `${giftBox.offsetTop + 75}px`;
+      sparkle.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
+      sparkle.style.setProperty('--y', `${Math.random() * -150}px`);
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    }
+  });
 };
-
-const giftBox = document.getElementById('giftBox');
-const giftContent = document.getElementById('giftContent');
-const bgMusic = document.getElementById('bgMusic');
-
-giftBox.addEventListener('click', () => {
-  giftBox.classList.toggle('open');
-  giftContent.classList.toggle('show');
-
-  bgMusic.volume = 0.2;
-  bgMusic.play();
-
-  for (let i = 0; i < 20; i++) {
-    const sparkle = document.createElement('div');
-    sparkle.classList.add('sparkle');
-    sparkle.style.left = `${giftBox.offsetLeft + 75}px`;
-    sparkle.style.top = `${giftBox.offsetTop + 75}px`;
-    sparkle.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
-    sparkle.style.setProperty('--y', `${Math.random() * -150}px`);
-    document.body.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 1000);
-  }
-});
