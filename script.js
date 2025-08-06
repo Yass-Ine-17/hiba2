@@ -1,21 +1,28 @@
 function updateAge() {
-  const birthDate = new Date("2008-08-11T00:00:00");
+  const birthDate = new Date("2008-08-11T08:00:00");
   const now = new Date();
-  const diff = now - birthDate;
 
-  let seconds = Math.floor(diff / 1000);
+  const diff = now - birthDate; // milliseconds diff
+
+  const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
-  const weeks = Math.floor(days / 7);
-  const months = Math.floor(days / 30.44);
+
   const years = Math.floor(days / 365.25);
+  const daysAfterYears = days - Math.floor(years * 365.25);
+
+  const months = Math.floor(daysAfterYears / 30.44);
+  const daysAfterMonths = daysAfterYears - Math.floor(months * 30.44);
+
+  const weeks = Math.floor(daysAfterMonths / 7);
+  const daysLeft = daysAfterMonths - weeks * 7;
 
   const timeData = {
     "Years": years,
-    "Months": months % 12,
-    "Weeks": weeks % 4,
-    "Days": days % 7,
+    "Months": months,
+    "Weeks": weeks,
+    "Days": daysLeft,
     "Hours": hours % 24,
     "Minutes": minutes % 60,
     "Seconds": seconds % 60
@@ -32,8 +39,10 @@ function updateAge() {
   }
 }
 
+// Run once and every second
 updateAge();
 setInterval(updateAge, 1000);
+
 
 // Typing message
 const text = `Every second with you is a gift. I'm so grateful for your smile, your heart, and every little thing about you. Happy Birthday, beautiful 💞`;
